@@ -4,12 +4,9 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { createStore, applyMiddleware, compose } from "redux";
-import createSagaMiddleware from "redux-saga";
+import reduxThunk from "redux-thunk";
 import { Provider } from "react-redux";
 import RootReducer from "./redux/reducer/rootReducer";
-
-// create the saga middleware
-const sagaMiddleware = createSagaMiddleware();
 
 const composeEnhancers =
   typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -19,7 +16,7 @@ const composeEnhancers =
     : compose;
 
 const enhancer = composeEnhancers(
-  applyMiddleware(sagaMiddleware)
+  applyMiddleware(reduxThunk)
   // other store enhancers if any
 );
 
