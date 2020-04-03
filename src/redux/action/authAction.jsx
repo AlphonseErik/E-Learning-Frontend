@@ -13,7 +13,7 @@ export const signInAction = (userLogin) => {
         }).then(res => {
             console.log(res.data);
             localStorage.setItem(settings.accesstoken, res.data.accesstoken);
-            localStorage.setItem(settings.account, JSON.stringify(res.data));
+            localStorage.setItem(settings.credentials, JSON.stringify(res.data));
             restConnector.defaults.headers['Authorization'] = "Bearer " + res.data.accessToken;
             dispatch(reduxAction(SIGNIN, res.data));
             window.location.reload();

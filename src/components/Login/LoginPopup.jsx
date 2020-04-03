@@ -20,7 +20,7 @@ const LoginPopup = props => {
         if (value === "") {
             errorMessage = name.toUpperCase() + ' is required!!!';
         }
-        //Kiểm tra lỗi 
+        //Check error
         let userLoginUpdate = { ...user.userLogin, [name]: value };
         let errorsUpdate = { ...user.errors, [name]: errorMessage };
         setUser({
@@ -30,22 +30,20 @@ const LoginPopup = props => {
     }
 
     const handleSubmit = e => {
-        e.preventDefault();
         let valid = true;
         for (let errorName in user.errors) {
-            if (user.errors[errorName] !== "") //1 trong các thuộc tính user.errors ! rỗng  
-            {
+            if (user.errors[errorName] !== "") {
                 valid = false;
             }
         }
         for (let valueNotFind in user.userLogin) {
-            if (user.userLogin[valueNotFind] === "") //2 trong các thuộc tính user.userLogin = rỗng 
-            {
+            if (user.userLogin[valueNotFind] === "") {
                 valid = false;
             }
         }
         if (valid) {
             props.dispatch(signInAction(user.userLogin));
+            e.preventDefault();
         } else {
             alert('Please check your Username and Password');
         }

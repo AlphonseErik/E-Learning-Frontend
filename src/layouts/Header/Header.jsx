@@ -8,22 +8,30 @@ import { connect } from 'react-redux';
 const Header = props => {
 
     const renderPopup = () => {
-        return (
-            <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
+        return props.user ? (
+            <ul className="navbar-nav mr-auto">
                 <li className="nav-item active">
-                    <LoginPopup />
-                    <RegisterPopup />
-                    <Button data-toggle="modal" data-target="#LoginPopup">
-                        Login
-                    </Button>
-                </li>
-                <li className="nav-item active">
-                    <Button data-toggle="modal" data-target="#RegisterPopup">
-                        Register
+                    <Button disableRipple={true} disableElevation={true} disableElevation={true}>
+                        Hi, {props.user.fullName}
                     </Button>
                 </li>
             </ul>
-        )
+        ) : (
+                <ul className="navbar-nav mr-auto">
+                    <li className="nav-item active">
+                        <LoginPopup />
+                        <RegisterPopup />
+                        <Button data-toggle="modal" data-target="#LoginPopup">
+                            Login
+                        </Button>
+                    </li>
+                    <li className="nav-item active">
+                        <Button data-toggle="modal" data-target="#RegisterPopup">
+                            Register
+                        </Button>
+                    </li>
+                </ul>
+            )
     }
 
     return (
@@ -43,4 +51,8 @@ const Header = props => {
     )
 }
 
-export default connect()(Header);
+const mapStateToProps = state => ({
+    user: state.user.userProfile
+})
+
+export default connect(mapStateToProps)(Header);
