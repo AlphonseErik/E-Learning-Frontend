@@ -1,8 +1,7 @@
 const { restConnector } = require(".");
 
-
 class AuthService {
-    async verifyAccesstoken(accesstoken) {
+    verifyAccesstoken(accesstoken) {
         return restConnector({
             url: "/api/v1/auth/verifytoken",
             method: "POST",

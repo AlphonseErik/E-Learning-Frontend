@@ -1,6 +1,5 @@
 const { restConnector } = require(".");
 
-
 class UserService {
     getProfile(userID) {
         return restConnector({

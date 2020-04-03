@@ -30,6 +30,7 @@ const LoginPopup = props => {
     }
 
     const handleSubmit = e => {
+        e.preventDefault();
         let valid = true;
         for (let errorName in user.errors) {
             if (user.errors[errorName] !== "") {
@@ -43,41 +44,51 @@ const LoginPopup = props => {
         }
         if (valid) {
             props.dispatch(signInAction(user.userLogin));
-            e.preventDefault();
         } else {
             alert('Please check your Username and Password');
         }
     }
 
-    return (
-        <div className="modal fade" id="LoginPopup" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div className="modal-dialog" role="document">
-                <div className="modal-content">
-                    <div className="modal-header">
-                        <h5 className="modal-title" id="exampleModalLabel">Login</h5>
-                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div className="modal-body">
-                        <form onSubmit={handleSubmit}>
-                            <div>
-                                <h1>Username</h1>
-                                <input name="username" type="text" onChange={handleChange} />
-                                <p className="text text-danger">{user.errors.username}</p>
-                            </div>
-                            <div>
-                                <h1>Password</h1>
-                                <input name="password" type="password" onChange={handleChange} />
-                                <p className="text text-danger">{user.errors.password}</p>
-                            </div>
-                            <Button variant="contained" color="primary" type="submit">Login</Button>
-                        </form>
+    const renderPopup = () => {
+        return (
+            <div className="modal fade" id="LoginPopup" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">Login</h5>
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div className="modal-body">
+                            <form onSubmit={handleSubmit}>
+                                <div>
+                                    <h1>Username</h1>
+                                    <input name="username" type="text" onChange={handleChange} />
+                                    <p className="text text-danger">{user.errors.username}</p>
+                                </div>
+                                <div>
+                                    <h1>Password</h1>
+                                    <input name="password" type="password" onChange={handleChange} />
+                                    <p className="text text-danger">{user.errors.password}</p>
+                                </div>
+                                <Button variant="contained" color="primary" type="submit">Login</Button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
+        )
+    }
+
+    return (
+        <li className="nav-item active">
+            {renderPopup()}
+            <Button data-toggle="modal" data-target="#LoginPopup">
+                Login
+            </Button>
+        </li>
     )
 }
 

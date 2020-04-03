@@ -6,30 +6,19 @@ import RegisterPopup from '../../components/Register/RegisterPopup';
 import { connect } from 'react-redux';
 
 const Header = props => {
-
     const renderPopup = () => {
         return props.user ? (
-            <ul className="navbar-nav mr-auto">
+            <ul className="navbar-nav">
                 <li className="nav-item active">
-                    <Button disableRipple={true} disableElevation={true} disableElevation={true}>
+                    <Button disableRipple={true} disableElevation={true}>
                         Hi, {props.user.fullName}
                     </Button>
                 </li>
             </ul>
         ) : (
-                <ul className="navbar-nav mr-auto">
-                    <li className="nav-item active">
-                        <LoginPopup />
-                        <RegisterPopup />
-                        <Button data-toggle="modal" data-target="#LoginPopup">
-                            Login
-                        </Button>
-                    </li>
-                    <li className="nav-item active">
-                        <Button data-toggle="modal" data-target="#RegisterPopup">
-                            Register
-                        </Button>
-                    </li>
+                <ul className="navbar-nav">
+                    <LoginPopup />
+                    <RegisterPopup />
                 </ul>
             )
     }
@@ -43,6 +32,9 @@ const Header = props => {
                         <span className="navbar-toggler-icon" />
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul className="navbar-nav mr-auto">
+                            <li className="nav-item active"></li>
+                        </ul>
                         {renderPopup()}
                     </div>
                 </nav>
