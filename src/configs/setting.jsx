@@ -1,5 +1,5 @@
 export const settings = {
-    domain: "http://localhost:1000",
+    domain: "http://52.231.196.162:2000",
     accesstoken: "accesstoken",
     credentials: "credentials",
 }
