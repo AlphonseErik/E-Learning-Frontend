@@ -4,8 +4,32 @@ import classes from './Header.modules.scss';
 import LoginPopup from '../../components/Login/LoginPopup';
 import RegisterPopup from '../../components/Register/RegisterPopup';
 import { connect } from 'react-redux';
+import reduxAction from '../../redux/action/action';
+import { SIGNIN, GET_USER_ID } from '../../redux/action/type';
+import AuthService from "../../services/authService";
+
+const authService = new AuthService();
 
 const Header = props => {
+
+    React.useEffect(() => {
+        const accesstoken = localStorage.getItem("accesstoken");
+        const credentials = localStorage.getItem("credentials");
+        if (accesstoken) {
+            props.dispatch(reduxAction(SIGNIN, JSON.parse(credentials)));
+            authService.verifyAccesstoken(accesstoken)
+                .then(res => {
+                    props.dispatch({
+                        type: GET_USER_ID,
+                        payload: res.data,
+                    });
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        }
+    }, []);
+
     const renderPopup = () => {
         return props.user ? (
             <ul className="navbar-nav">
