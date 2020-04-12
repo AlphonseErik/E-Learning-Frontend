@@ -2,32 +2,9 @@ import React from 'react';
 import { Button } from '@material-ui/core';
 import classes from './Header.modules.scss';
 import { connect } from 'react-redux';
-import reduxAction from '../../redux/action/action';
-import { SIGNIN, GET_USER_ID } from '../../redux/action/type';
-import AuthService from "../../services/authService";
 import { routes } from '../../features/router';
 
-const authService = new AuthService();
-
 const Header = props => {
-
-    React.useEffect(() => {
-        const accesstoken = localStorage.getItem("accesstoken");
-        const credentials = localStorage.getItem("credentials");
-        if (accesstoken) {
-            props.dispatch(reduxAction(SIGNIN, JSON.parse(credentials)));
-            authService.verifyAccesstoken(accesstoken)
-                .then(res => {
-                    props.dispatch({
-                        type: GET_USER_ID,
-                        payload: res.data,
-                    });
-                })
-                .catch(err => {
-                    console.log(err);
-                });
-        }
-    }, []);
 
     const renderPopup = () => {
         return props.user ? (
@@ -71,7 +48,8 @@ const Header = props => {
 }
 
 const mapStateToProps = state => ({
-    user: state.user.userProfile
+    user: state.user.userProfile,
+    auth: state.auth,
 })
 
 export default connect(mapStateToProps)(Header);

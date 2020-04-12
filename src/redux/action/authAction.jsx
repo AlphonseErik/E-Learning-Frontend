@@ -13,14 +13,14 @@ export const signInAction = (userLogin, history) => {
             data: userLogin
         }).then(res => {
             console.log(res.data);
+            console.log(history)
             localStorage.setItem(settings.accesstoken, res.data.accesstoken);
             localStorage.setItem(settings.credentials, JSON.stringify(res.data));
             restConnector.defaults.headers['Authorization'] = "Bearer " + res.data.accessToken;
             dispatch(reduxAction(SIGNIN, res.data));
-            history.push('./home');
+            history.push('/home');
         }).catch(err => {
-            // console.log(err.response.data.errors);
-            console.log('Error: ' + err)
+            console.log(err);
         })
     }
 }
