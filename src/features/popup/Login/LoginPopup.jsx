@@ -1,5 +1,5 @@
 import React from 'react'
-import { signInAction } from '../../redux/action/authAction';
+import { signInAction } from '../../../redux/action/authAction';
 import { connect } from 'react-redux';
 import { Button } from '@material-ui/core';
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { registerAction } from '../../redux/action/userAction';
+import { registerAction } from '../../../redux/action/userAction';
 import { Button } from '@material-ui/core';
 import { connect } from 'react-redux';
 
@@ -53,7 +53,7 @@ const RegisterPopup = props => {
         if (valid) {
             props.dispatch(registerAction(user.userRegister));
         } else {
-            alert('Please check your Username and Password');
+            alert('Please check your input');
         }
     }
 

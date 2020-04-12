@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
 import classes from './Header.modules.scss';
-import LoginPopup from '../../components/Login/LoginPopup';
-import RegisterPopup from '../../components/Register/RegisterPopup';
+import LoginPopup from '../../features/popup/Login/LoginPopup';
+import RegisterPopup from '../../features/popup/Register/RegisterPopup';
 import { connect } from 'react-redux';
 import reduxAction from '../../redux/action/action';
 import { SIGNIN, GET_USER_ID } from '../../redux/action/type';
