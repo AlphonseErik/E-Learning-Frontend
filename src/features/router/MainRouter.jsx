@@ -20,6 +20,7 @@ const MainRouter = () => {
                 {/*public route */}
                 <Route path={routes.login} component={Login} />
                 <Route path={routes.register} component={Register} />
+                <Route path="/" exact component={Login} />
                 {/*private route */}
                 <PrivateRouter path={routes.home} Component={HomeScreen} />
             </Switch>

@@ -5,4 +5,4 @@ const reduxAction = (type, payload) => {
     };
 };
 
-export default reduxAction
+export default reduxAction;

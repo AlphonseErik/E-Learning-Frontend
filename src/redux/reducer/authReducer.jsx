@@ -9,7 +9,6 @@ let initialState = {
 const AuthReducer = (state = initialState, { type, payload }) => {
     switch (type) {
         case SIGNIN: {
-            // console.log(payload)
             state.credentials = payload;
             return { ...state, isLogin: true };
         }

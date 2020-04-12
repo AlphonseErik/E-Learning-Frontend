@@ -18,7 +18,7 @@ export const signInAction = (userLogin, history) => {
             localStorage.setItem(settings.credentials, JSON.stringify(res.data));
             restConnector.defaults.headers['Authorization'] = "Bearer " + res.data.accessToken;
             dispatch(reduxAction(SIGNIN, res.data));
-            history.push('/home');
+            history.push(`${routes.home}`);
         }).catch(err => {
             console.log(err);
         })
