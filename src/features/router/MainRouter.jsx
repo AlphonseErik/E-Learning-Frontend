@@ -12,12 +12,12 @@ import Header from "../../layouts/Header/Header";
 const MainRouter = () => {
     return (
         <BrowserRouter>
-        <Header/>
+            <Header />
             <Switch>
                 {/*public route */}
                 <Redirect path="/" to={routes.home} exact />
                 <Route path={routes.home}>
-                    <HomeScreen/>
+                    <HomeScreen />
                 </Route>
                 {/*private route */}
             </Switch>
