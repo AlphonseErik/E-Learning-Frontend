@@ -11,13 +11,11 @@ import Login from "../login/Login";
 import Register from "../register/Register";
 import PrivateRouter from "../HOC/PrivateRouter";
 import UserService from "../../services/userService";
-import { GET_USER_PROFILE, SIGNIN, GET_USER_ID } from "../../redux/action/type";
+import { GET_USER_PROFILE, SIGNIN } from "../../redux/action/type";
 import reduxAction from "../../redux/action/action";
-import AuthService from "../../services/authService";
 import { connect } from "react-redux";
+import { authenticate, getProfile } from "./action";
 
-
-const authService = new AuthService();
 const userService = new UserService();
 
 const MainRouter = props => {
@@ -27,32 +25,15 @@ const MainRouter = props => {
         const credentials = localStorage.getItem("credentials");
         if (accesstoken && credentials) {
             props.dispatch(reduxAction(SIGNIN, JSON.parse(credentials)));
-            authService.verifyAccesstoken(accesstoken)
-                .then(res => {
-                    props.dispatch({
-                        type: GET_USER_ID,
-                        payload: res.data,
-                    });
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+            props.dispatch(authenticate({ accesstoken }))
         }
     }, []);
 
     React.useEffect(() => {
-        console.log(props.auth, props.user)
         if (props.auth && props.user) {
-            userService.getProfile(props.user)
-                .then(res => {
-                    props.dispatch({
-                        type: GET_USER_PROFILE,
-                        payload: res.data
-                    })
-                }
-                )
+            props.dispatch(getProfile(props.user))
         }
-    }, [props.user], [props.auth])
+    }, [props.user, props.auth])
 
     return (
         <BrowserRouter>
