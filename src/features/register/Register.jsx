@@ -2,6 +2,8 @@ import React from 'react'
 import { registerAction } from '../../redux/action/userAction';
 import { Button } from '@material-ui/core';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { routes } from '../router';
 
 const Register = props => {
 
@@ -94,10 +96,18 @@ const Register = props => {
 
     return (
         <li className="nav-item active">
-            {renderRegister()}
+            {(props.auth && props.user) ? (
+                <Redirect to={routes.home} />
+            ) : (
+                    renderRegister()
+                )}
         </li>
     )
-
 }
 
-export default connect()(Register);
+const mapStateToProps = state => ({
+    auth: state.auth,
+    user: state.user.userID,
+})
+
+export default connect(mapStateToProps)(Register);

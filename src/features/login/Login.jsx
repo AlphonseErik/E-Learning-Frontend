@@ -2,6 +2,8 @@ import React from 'react'
 import { signInAction } from '../../redux/action/authAction';
 import { connect } from 'react-redux';
 import { Button } from '@material-ui/core';
+import { Redirect } from 'react-router-dom';
+import { routes } from '../router';
 
 function Login(props) {
     let [user, setUser] = React.useState({
@@ -71,9 +73,18 @@ function Login(props) {
 
     return (
         <li className="nav-item active">
-            {renderLogin()}
+            {(props.auth && props.user)?(
+                <Redirect to={routes.home}/>
+            ) : (
+                renderLogin()
+            )}
         </li>
     )
 }
 
-export default connect()(Login);
+const mapStateToProps = state => ({
+    auth: state.auth,
+    user: state.user.userID,
+})
+
+export default connect(mapStateToProps)(Login);
