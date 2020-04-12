@@ -2,9 +2,10 @@ import { restConnector } from "../../services";
 import reduxAction from "./action";
 import { SIGNIN } from "./type";
 import { settings } from "../../configs/setting";
+import { routes } from "../../features/router";
 
 
-export const signInAction = (userLogin) => {
+export const signInAction = (userLogin, history) => {
     return dispatch => {
         restConnector({
             method: "POST",
@@ -16,12 +17,10 @@ export const signInAction = (userLogin) => {
             localStorage.setItem(settings.credentials, JSON.stringify(res.data));
             restConnector.defaults.headers['Authorization'] = "Bearer " + res.data.accessToken;
             dispatch(reduxAction(SIGNIN, res.data));
-            window.location.reload();
+            history.push('./home');
         }).catch(err => {
             // console.log(err.response.data.errors);
-            err.response.data.errors.map(index => {
-                return (alert('Error: ' + index.messages))
-            })
+            console.log('Error: ' + err)
         })
     }
 }

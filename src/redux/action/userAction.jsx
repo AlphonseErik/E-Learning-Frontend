@@ -9,7 +9,6 @@ export const registerAction = (userRegister) => {
             data: userRegister
         }).then(res => {
             console.log(res.data);
-            window.location.reload();
             (alert('Register Success!!'));
         }).catch(err => {
             err.response.data.errors.map(index => {

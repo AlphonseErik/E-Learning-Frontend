@@ -1,12 +1,11 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
 import classes from './Header.modules.scss';
-import LoginPopup from '../../features/popup/Login/LoginPopup';
-import RegisterPopup from '../../features/popup/Register/RegisterPopup';
 import { connect } from 'react-redux';
 import reduxAction from '../../redux/action/action';
 import { SIGNIN, GET_USER_ID } from '../../redux/action/type';
 import AuthService from "../../services/authService";
+import { routes } from '../../features/router';
 
 const authService = new AuthService();
 
@@ -41,8 +40,12 @@ const Header = props => {
             </ul>
         ) : (
                 <ul className="navbar-nav">
-                    <LoginPopup />
-                    <RegisterPopup />
+                    <Button href={routes.login}>
+                        Login
+                    </Button>
+                    <Button href={routes.register}>
+                        Register
+                    </Button>
                 </ul>
             )
     }
