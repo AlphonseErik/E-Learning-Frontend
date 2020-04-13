@@ -10,30 +10,27 @@ import Header from "../../layouts/Header/Header";
 import Login from "../login/Login";
 import Register from "../register/Register";
 import PrivateRouter from "../HOC/PrivateRouter";
-import UserService from "../../services/userService";
-import { GET_USER_PROFILE, SIGNIN } from "../../redux/action/type";
+import { SIGNIN } from "../../redux/action/type";
 import reduxAction from "../../redux/action/action";
 import { connect } from "react-redux";
 import { authenticate, getProfile } from "./action";
 
-const userService = new UserService();
-
 const MainRouter = props => {
-
+    const accesstoken = localStorage.getItem("accesstoken");
+    const credentials = localStorage.getItem("credentials");
     React.useEffect(() => {
-        const accesstoken = localStorage.getItem("accesstoken");
-        const credentials = localStorage.getItem("credentials");
         if (accesstoken && credentials) {
             props.dispatch(reduxAction(SIGNIN, JSON.parse(credentials)));
-            props.dispatch(authenticate({ accesstoken }))
+            props.dispatch(authenticate(accesstoken))
         }
-    }, []);
+    }, [accesstoken], [credentials]);
 
     React.useEffect(() => {
+        console.log(props.auth, props.user)
         if (props.auth && props.user) {
             props.dispatch(getProfile(props.user))
         }
-    }, [props.user, props.auth])
+    }, [props.user], [props.auth])
 
     return (
         <BrowserRouter>

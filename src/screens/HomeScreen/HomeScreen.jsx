@@ -1,6 +1,7 @@
 import React from "react";
+import { connect } from "react-redux";
 
-const HomeScreen = () => {
+const HomeScreen = props => {
 
   return (
     <React.Fragment>
@@ -9,4 +10,4 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default connect()(HomeScreen);

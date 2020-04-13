@@ -12,11 +12,9 @@ export const signInAction = (userLogin, history) => {
             url: "/api/v1/auth/signin",
             data: userLogin
         }).then(res => {
-            console.log(res.data);
-            console.log(history)
             localStorage.setItem(settings.accesstoken, res.data.accesstoken);
             localStorage.setItem(settings.credentials, JSON.stringify(res.data));
-            restConnector.defaults.headers['Authorization'] = "Bearer " + res.data.accessToken;
+            restConnector.defaults.headers['Authorization'] = "Bearer " + res.data.accesstoken;
             dispatch(reduxAction(SIGNIN, res.data));
             history.push(`${routes.home}`);
         }).catch(err => {

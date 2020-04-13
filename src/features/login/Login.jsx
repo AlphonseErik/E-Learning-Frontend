@@ -5,7 +5,7 @@ import { Button } from '@material-ui/core';
 import { Redirect } from 'react-router-dom';
 import { routes } from '../router';
 
-function Login(props) {
+const Login = props => {
     let [user, setUser] = React.useState({
         userLogin: {
             username: "",
@@ -73,11 +73,11 @@ function Login(props) {
 
     return (
         <li className="nav-item active">
-            {(props.auth && props.user)?(
-                <Redirect to={routes.home}/>
+            {(props.auth && props.user) ? (
+                <Redirect to={routes.home} />
             ) : (
-                renderLogin()
-            )}
+                    renderLogin()
+                )}
         </li>
     )
 }
