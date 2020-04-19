@@ -19,17 +19,36 @@ const MainRouter = props => {
     const accesstoken = localStorage.getItem("accesstoken");
     const credentials = localStorage.getItem("credentials");
     React.useEffect(() => {
-        if (accesstoken && credentials) {
-            props.dispatch(reduxAction(SIGNIN, JSON.parse(credentials)));
-            props.dispatch(authenticate(accesstoken))
+        const fetchData = async () => {
+            try {
+                if (accesstoken && credentials) {
+                    props.dispatch(reduxAction(SIGNIN, JSON.parse(credentials)));
+                    props.dispatch(authenticate(accesstoken))
+                } else {
+
+                }
+            } catch (e) {
+                console.log(e)
+            }
         }
+        fetchData();
     }, [accesstoken], [credentials]);
 
     React.useEffect(() => {
-        console.log(props.auth, props.user)
-        if (props.auth && props.user) {
-            props.dispatch(getProfile(props.user))
+        const fetchUserProfile = async () => {
+            try {
+                console.log(props.auth, props.user)
+                if (props.auth && props.user) {
+                    props.dispatch(getProfile(props.user))
+                } else {
+
+                }
+            } catch (e) {
+                console.log(e)
+            }
+
         }
+        fetchUserProfile()
     }, [props.user], [props.auth])
 
     return (

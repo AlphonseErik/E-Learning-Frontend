@@ -53,7 +53,7 @@ const Login = props => {
 
     const renderLogin = () => {
         return (
-            <div>
+            <div className="container">
                 <form onSubmit={handleSubmit}>
                     <div>
                         <h1>Username</h1>
@@ -72,13 +72,13 @@ const Login = props => {
     }
 
     return (
-        <li className="nav-item active">
+        <div>
             {(props.auth && props.user) ? (
                 <Redirect to={routes.home} />
             ) : (
                     renderLogin()
                 )}
-        </li>
+        </div>
     )
 }
 

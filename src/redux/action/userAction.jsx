@@ -2,7 +2,7 @@ import { restConnector } from "../../services";
 import { routes } from "../../features/router";
 
 
-export const registerAction = (userRegister, history) => {
+export const registerAction = async(userRegister, history) => {
     return dispatch => {
         restConnector({
             method: "POST",

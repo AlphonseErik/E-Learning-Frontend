@@ -17,12 +17,16 @@ const Header = props => {
             </ul>
         ) : (
                 <ul className="navbar-nav">
-                    <Button href={routes.login}>
-                        Login
+                    <li className="nav-item active">
+                        <Button href={routes.login}>
+                            Login
                     </Button>
-                    <Button href={routes.register}>
-                        Register
+                    </li>
+                    <li className="nav-item active">
+                        <Button href={routes.register}>
+                            Register
                     </Button>
+                    </li>
                 </ul>
             )
     }

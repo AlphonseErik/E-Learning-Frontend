@@ -95,13 +95,13 @@ const Register = props => {
     }
 
     return (
-        <li className="nav-item active">
+        <div className="container">
             {(props.auth && props.user) ? (
                 <Redirect to={routes.home} />
             ) : (
                     renderRegister()
                 )}
-        </li>
+        </div>
     )
 }
 

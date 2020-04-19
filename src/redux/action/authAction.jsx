@@ -5,7 +5,7 @@ import { settings } from "../../configs/setting";
 import { routes } from "../../features/router";
 
 
-export const signInAction = (userLogin, history) => {
+export const signInAction = async(userLogin, history) => {
     return dispatch => {
         restConnector({
             method: "POST",
