@@ -45,6 +45,7 @@ const Login = props => {
             }
         }
         if (valid) {
+            console.log(user.userLogin, props.history)
             props.dispatch(signInAction(user.userLogin, props.history));
         } else {
             alert('Please check your Username and Password');

@@ -20,7 +20,7 @@ const Header = props => {
                     <li className="nav-item active">
                         <Button href={routes.login}>
                             Login
-                    </Button>
+                        </Button>
                     </li>
                     <li className="nav-item active">
                         <Button href={routes.register}>

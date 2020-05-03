@@ -5,7 +5,7 @@ import { settings } from "../../configs/setting";
 import { routes } from "../../features/router";
 
 
-export const signInAction = async(userLogin, history) => {
+export const signInAction = (userLogin, history) => {
     return dispatch => {
         restConnector({
             method: "POST",
@@ -18,7 +18,14 @@ export const signInAction = async(userLogin, history) => {
             dispatch(reduxAction(SIGNIN, res.data));
             history.push(`${routes.home}`);
         }).catch(err => {
-            console.log(err);
+            console.log(err)
+            console.log(err.reponse)
+            if (err.reponse) {
+                err.response.data.errors.map(index => {
+                    return (alert('ERROR: ' + index.messages))
+                })
+            }
+            return (alert('ERROR NOT FOUND'))
         })
     }
 }
