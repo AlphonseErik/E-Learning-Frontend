@@ -9,11 +9,6 @@ function App() {
   return (
     <Provider store={store}>
       <MainRouter />
-<<<<<<< HEAD
-      <StaffDB/>
-    
-=======
->>>>>>> 55198250c94ed907fd2634bf8d47ae354700e673
     </Provider>
     
   );
