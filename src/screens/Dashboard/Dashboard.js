@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { Typography, Chip, TextField, Button,
          List, ListItem, ListItemText } from '@material-ui/core';
-
+import TeacherManagement from '../TeacherManage/TeacherManagement'
 
 
 
@@ -86,6 +86,7 @@ export default function Dashboard() {
 
                 </div>
             </Paper>
+            <TeacherManagement/>
             </div>
         )
     

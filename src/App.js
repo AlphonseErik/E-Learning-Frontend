@@ -10,7 +10,9 @@ function App() {
     <Provider store={store}>
       <MainRouter />
       <StaffDB/>
+    
     </Provider>
+    
   );
 }
 
