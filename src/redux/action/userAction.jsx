@@ -13,9 +13,12 @@ export const registerAction = async(userRegister, history) => {
             (alert('Register Success!!'));
             history.push(`${routes.login}`);
         }).catch(err => {
-            err.response.data.errors.map(index => {
-                return (alert('Error: ' + index.messages))
-            })
+            if(err.reponse){
+                err.response.data.errors.map(index => {
+                    return (alert('ERROR: ' + index.messages))
+                })
+            }
+            return (alert('ERROR NOT FOUND'))
         })
     }
 }
