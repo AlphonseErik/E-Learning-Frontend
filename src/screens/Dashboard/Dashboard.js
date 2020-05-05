@@ -1,11 +1,7 @@
 import React  from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import { Typography, Chip, TextField, Button,
-         List, ListItem, ListItemText } from '@material-ui/core';
-
-
-
+import { Typography, Chip, TextField, Button, List, ListItem, ListItemText } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -36,14 +32,14 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function Dashboard() {
+const Dashboard = props => {
 
     const classes = useStyles();
 
     const [textValue, changeTextValue] = React.useState('');
 
         return (
-            <div >
+            // <div >
             <Paper className={classes.root} >
                 <Typography variant ="h4" component="h3">
                     Class Room
@@ -82,12 +78,11 @@ export default function Dashboard() {
                      <Button size="large" variant="contained" color="primary">
                         SEND
                     </Button>
-               
-
                 </div>
             </Paper>
-            </div>
+            // </div>
         )
     
 }
 
+export default Dashboard

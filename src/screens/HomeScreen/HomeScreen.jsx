@@ -1,13 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
+import Dashboard from "../Dashboard/Dashboard";
+import StaffDB from "../Dashboard/StaffDB";
+import LoadingScreen from "../LoadingScreen/LoadingScreen";
 
 const HomeScreen = props => {
+  console.log('homescreen', props)
 
   return (
     <React.Fragment>
-
+      <Dashboard/>
     </React.Fragment>
   );
 };
 
-export default connect()(HomeScreen);
+const mapStateToProps = state => ({
+  user: state.user.isAdmin
+})
+
+export default connect(mapStateToProps)(HomeScreen);

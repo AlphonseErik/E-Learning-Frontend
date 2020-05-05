@@ -14,18 +14,19 @@ import { SIGNIN } from "../../redux/action/type";
 import reduxAction from "../../redux/action/action";
 import { connect } from "react-redux";
 import { authenticate, getProfile } from "./action";
+import Dashboard from "../../screens/Dashboard/Dashboard";
 
 const MainRouter = props => {
     const accesstoken = localStorage.getItem("accesstoken");
     const credentials = localStorage.getItem("credentials");
     React.useEffect(() => {
-        const fetchData = async () => {
+        const fetchData = () => {
             try {
                 if (accesstoken && credentials) {
                     props.dispatch(reduxAction(SIGNIN, JSON.parse(credentials)));
                     props.dispatch(authenticate(accesstoken))
                 } else {
-
+                    
                 }
             } catch (e) {
                 console.log(e)
@@ -35,13 +36,15 @@ const MainRouter = props => {
     }, [accesstoken], [credentials]);
 
     React.useEffect(() => {
-        const fetchUserProfile = async () => {
+        const fetchUserProfile = () => {
             try {
                 console.log(props.auth, props.user)
                 if (props.auth && props.user) {
                     props.dispatch(getProfile(props.user))
                 } else {
-
+                    if(props.user.isAdmin){
+                        console.log(1)
+                    }
                 }
             } catch (e) {
                 console.log(e)
@@ -61,6 +64,7 @@ const MainRouter = props => {
                 <Route path="/" exact component={Login} />
                 {/*private route */}
                 <PrivateRouter path={routes.home} Component={HomeScreen} />
+                <PrivateRouter path={routes.dashboard} Component={Dashboard}/>
             </Switch>
         </BrowserRouter>
     )
