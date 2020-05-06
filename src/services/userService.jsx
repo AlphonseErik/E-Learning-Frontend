@@ -10,6 +10,13 @@ class UserService {
             }
         })
     }
+
+    fetchAllStudent(){
+        return restConnector({
+            url: `/api/v1/users/getallstudent`,
+            method: "GET",
+        })
+    }
 }
 
 export default UserService;

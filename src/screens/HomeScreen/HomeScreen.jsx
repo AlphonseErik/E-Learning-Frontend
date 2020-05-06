@@ -9,7 +9,7 @@ const HomeScreen = props => {
 
   return (
     <React.Fragment>
-      <Dashboard/>
+      <StaffDB/>
     </React.Fragment>
   );
 };

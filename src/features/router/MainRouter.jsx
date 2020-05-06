@@ -42,9 +42,9 @@ const MainRouter = props => {
                 if (props.auth && props.user) {
                     props.dispatch(getProfile(props.user))
                 } else {
-                    if(props.user.isAdmin){
-                        console.log(1)
-                    }
+                    // if(props.user.isAdmin){
+                    //     console.log(1)
+                    // }
                 }
             } catch (e) {
                 console.log(e)

@@ -2,7 +2,7 @@ import { restConnector } from "../../services";
 import { routes } from "../../features/router";
 
 
-export const registerAction = async(userRegister, history) => {
+export const registerAction = (userRegister, history) => {
     return dispatch => {
         restConnector({
             method: "POST",
@@ -13,7 +13,7 @@ export const registerAction = async(userRegister, history) => {
             (alert('Register Success!!'));
             history.push(`${routes.login}`);
         }).catch(err => {
-            if(err.reponse){
+            if (err.reponse) {
                 err.response.data.errors.map(index => {
                     return (alert('ERROR: ' + index.messages))
                 })
