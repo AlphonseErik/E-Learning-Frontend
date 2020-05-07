@@ -11,9 +11,16 @@ class UserService {
         })
     }
 
-    fetchAllStudent(){
+    fetchAllStudent() {
         return restConnector({
-            url: `/api/v1/users/getallstudent`,
+            url: '/api/v1/users/getallstudent',
+            method: "GET",
+        })
+    }
+
+    fetchAllTeacher() {
+        return restConnector({
+            url: '/api/v1/users/getallteacher',
             method: "GET",
         })
     }

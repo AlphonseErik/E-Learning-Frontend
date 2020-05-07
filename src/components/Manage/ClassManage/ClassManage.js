@@ -1,59 +1,74 @@
-import React, { Component } from "react";
+import React from "react";
 import TextField from "@material-ui/core/TextField";
 import { Modal, Button } from "react-bootstrap";
+import { fetchStudent, fetchTeacher } from "../action";
+import { connect } from "react-redux";
 
 const table = {
-  width: "875px",
+  width: "720px",
 };
 
-const TeacherManagement = (props) => {
+const ClassManage = (props) => {
+  React.useEffect(() => {
+    const fetchData = () => {
+      try {
+        props.dispatch(fetchStudent());
+        props.dispatch(fetchTeacher());
+      } catch (e) {}
+    };
+    fetchData();
+  }, []);
+
+  console.log(props.student, props.teacher);
+
+  let { show, onHide } = props;
+
   return (
     <Modal
-      {...props}
+      {...{ show, onHide }}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Teacher Management
+          Class Management
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <div className="container">
           <div className="row">
             <div className="col-xs-4">
-              <div className="panel panel-warrning">
+              <div className="panel panel-warning">
                 <div className="panel-heading">
-                  <h4 className="panel-title">Add New Teacher</h4>
+                  <h4 className="panel-title">Add New Class Room</h4>
                 </div>
                 <div className="panel-body">
                   <form>
                     <div className="form-group">
-                      {/* <label>Name:</label> */}
                       <TextField
                         required
                         size="small"
                         id="outlined-required"
-                        label="Teacher name"
+                        label="Class name"
                         defaultValue=""
                         variant="outlined"
                       />
                     </div>
-
                     <div className="form-group">
-                      {/* <label>Email:</label> */}
-                      <TextField
-                        required
-                        type="email"
-                        size="small"
-                        id="outlined-required"
-                        label="Email"
-                        defaultValue=""
-                        variant="outlined"
-                      />
+                      <label>Teacher</label>
+                      <select className="form-control">
+                        <option>John</option>
+                        <option>Emily</option>
+                      </select>
                     </div>
-
+                    <div className="form-group">
+                      <label>Student</label>
+                      <select className="form-control">
+                        <option>Jeremy</option>
+                        <option>HAHA</option>
+                      </select>
+                    </div>
                     <div className="btn">
                       <button type="submit" className="btn btn-warning ml-4">
                         Save
@@ -73,8 +88,8 @@ const TeacherManagement = (props) => {
                     <table className="table table-bordered table-hover">
                       <thead>
                         <tr className="text-center">
-                          <th>NO</th>
-                          <th>Name</th>
+                          <th>No.</th>
+                          <th>Class Name</th>
                           <th>Status</th>
                           <th>Update</th>
                         </tr>
@@ -82,11 +97,9 @@ const TeacherManagement = (props) => {
                       <tbody>
                         <tr>
                           <td>1</td>
-                          <td>John</td>
+                          <td>CLass T01</td>
                           <td className="text-center">
-                            <span>
-                              Actived
-                            </span>
+                            <span>Actived</span>
                           </td>
                           <td className="text-center">
                             <button type="button" className="btn btn-warning">
@@ -118,4 +131,9 @@ const TeacherManagement = (props) => {
   );
 };
 
-export default TeacherManagement;
+const mapStateToProps = state => ({
+  student: state.student.studentList,
+  teacher: state.teacher.teacherList,
+});
+
+export default connect(mapStateToProps)(ClassManage);

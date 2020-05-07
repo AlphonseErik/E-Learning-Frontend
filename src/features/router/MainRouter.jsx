@@ -3,6 +3,7 @@ import {
     BrowserRouter,
     Switch,
     Route,
+    Redirect,
 } from "react-router-dom";
 import { routes } from ".";
 import HomeScreen from "../../screens/HomeScreen/HomeScreen";
@@ -14,7 +15,7 @@ import { SIGNIN } from "../../redux/action/type";
 import reduxAction from "../../redux/action/action";
 import { connect } from "react-redux";
 import { authenticate, getProfile } from "./action";
-import Dashboard from "../../screens/Dashboard/Dashboard";
+import AdminDashboard from "../../screens/MainScreen/AdminDashboard";
 
 const MainRouter = props => {
     const accesstoken = localStorage.getItem("accesstoken");
@@ -26,7 +27,7 @@ const MainRouter = props => {
                     props.dispatch(reduxAction(SIGNIN, JSON.parse(credentials)));
                     props.dispatch(authenticate(accesstoken))
                 } else {
-                    
+
                 }
             } catch (e) {
                 console.log(e)
@@ -41,15 +42,10 @@ const MainRouter = props => {
                 console.log(props.auth, props.user)
                 if (props.auth && props.user) {
                     props.dispatch(getProfile(props.user))
-                } else {
-                    // if(props.user.isAdmin){
-                    //     console.log(1)
-                    // }
                 }
             } catch (e) {
                 console.log(e)
             }
-
         }
         fetchUserProfile()
     }, [props.user], [props.auth])
@@ -64,7 +60,7 @@ const MainRouter = props => {
                 <Route path="/" exact component={Login} />
                 {/*private route */}
                 <PrivateRouter path={routes.home} Component={HomeScreen} />
-                <PrivateRouter path={routes.dashboard} Component={Dashboard}/>
+                <PrivateRouter path={routes.dashboard} Component={AdminDashboard} />
             </Switch>
         </BrowserRouter>
     )

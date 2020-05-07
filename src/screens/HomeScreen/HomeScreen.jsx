@@ -1,15 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import Dashboard from "../Dashboard/Dashboard";
-import StaffDB from "../Dashboard/StaffDB";
-import LoadingScreen from "../LoadingScreen/LoadingScreen";
+import Dashboard from "../MainScreen/Dashboard";
 
 const HomeScreen = props => {
   console.log('homescreen', props)
 
   return (
     <React.Fragment>
-      <StaffDB/>
+      <Dashboard/>
     </React.Fragment>
   );
 };

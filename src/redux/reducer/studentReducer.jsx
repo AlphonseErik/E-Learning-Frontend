@@ -1,12 +1,14 @@
 import { GET_STUDENT_LIST } from "../action/type";
 
 
-let initialState = {}
+let initialState = {
+    studentList: null
+}
 
 const StudentReducer = (state = initialState, { type, payload }) => {
     switch (type) {
         case GET_STUDENT_LIST: {
-            state = payload;
+            state.studentList = payload;
             return { ...state};
         }
         default:
