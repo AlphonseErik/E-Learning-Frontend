@@ -23,7 +23,7 @@ export const registerAction = (userRegister, history) => {
     }
 }
 
-export const registerTeacherAction = (userRegister, history, accesstoken) => {
+export const registerTeacherAction = (userRegister, accesstoken) => {
     return dispatch => {
         restConnector({
             method: "POST",
@@ -37,6 +37,7 @@ export const registerTeacherAction = (userRegister, history, accesstoken) => {
             }
         }).then(res => {
             console.log(res.data);
+            window.location.reload();
             return (alert('Register Success!!'));
         }).catch(err => {
             console.log(err)
@@ -50,12 +51,13 @@ export const registerTeacherAction = (userRegister, history, accesstoken) => {
     }
 }
 
-export const registerStudentAction = (userRegister, history, accesstoken) => {
+export const registerStudentAction = (userRegister, accesstoken) => {
     return dispatch => {
         restConnector({
             method: "POST",
             url: "/api/v1/users/register",
             data: {
+                type: 0,
                 ...userRegister
             },
             headers: {
@@ -63,6 +65,7 @@ export const registerStudentAction = (userRegister, history, accesstoken) => {
             }
         }).then(res => {
             console.log(res.data);
+            window.location.reload();
             return (alert('Register Success!!'));
         }).catch(err => {
             console.log(err)

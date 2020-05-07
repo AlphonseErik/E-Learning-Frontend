@@ -7,3 +7,5 @@ export const GET_USER_PROFILE = "GET_USER_PROFILE";
 export const GET_STUDENT_LIST = "GET_STUDENT_LIST";
 
 export const GET_TEACHER_LIST = "GET_TEACHER_LIST";
+
+export const GET_CLASS_LIST = "GET_CLASS_LIST";

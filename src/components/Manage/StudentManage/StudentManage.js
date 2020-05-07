@@ -14,14 +14,14 @@ const table = {
 };
 
 const StudentManage = (props) => {
-  React.useEffect(() => {
-    const fetchStudentData = () => {
-      try {
-        props.dispatch(fetchStudent());
-      } catch (e) {}
-    };
-    fetchStudentData();
-  }, []);
+  // React.useEffect(() => {
+  //   const fetchStudentData = () => {
+  //     try {
+  //       props.dispatch(fetchStudent());
+  //     } catch (e) {}
+  //   };
+  //   fetchStudentData();
+  // }, []);
 
   let [user, setUser] = React.useState({
     userRegister: {
@@ -72,7 +72,7 @@ const StudentManage = (props) => {
     const accesstoken = localStorage.getItem("accesstoken");
     if (valid) {
       props.dispatch(
-        registerStudentAction(user.userRegister, props.history, accesstoken)
+        registerStudentAction(user.userRegister, accesstoken)
       );
     } else {
       alert("Please check your input");
@@ -226,27 +226,7 @@ const StudentManage = (props) => {
                         <th></th>
                       </tr>
                     </thead>
-                    {/* <tbody> */}
-                    {/* <tr>
-                        <td>1</td>
-                        <td>Jeremy</td>
-                        <td className="text-center">
-                          <span>Actived</span>
-                        </td>
-                        <td className="text-center">
-                          <button type="button" className="btn btn-warning">
-                            Edit
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-secondary ml-3"
-                          >
-                            Delete
-                          </button>
-                        </td>
-                      </tr> */}
                     {renderStudentList()}
-                    {/* </tbody> */}
                   </table>
                 </div>
               </div>

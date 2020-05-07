@@ -59,9 +59,7 @@ const TeacherManagement = (props) => {
     const accesstoken = localStorage.getItem("accesstoken");
     console.log(accesstoken);
     if (valid) {
-      props.dispatch(
-        registerTeacherAction(user.userRegister, props.history, accesstoken)
-      );
+      props.dispatch(registerTeacherAction(user.userRegister, accesstoken));
     } else {
       alert("Please check your input");
     }
@@ -115,14 +113,61 @@ const TeacherManagement = (props) => {
           onChange={handleChange}
         />
         <p className="text text-danger">{user.errors.password}</p>
-        <Button
-          variant="contained"
-          color="secondary"
-          type="submit"
-        >
+        <Button variant="contained" color="secondary" type="submit">
           Save
         </Button>
       </form>
+    );
+  };
+
+  const renderTeacherList = () => {
+    if (props.teacher) {
+      return (
+        <tbody>
+          {props.teacher.docs.map((item, index) => {
+            return (
+              <tr key={index}>
+                <td className="text-center">{index + 1}</td>
+                <td>{item.fullName}</td>
+                <td className="text-center">
+                  {item.isActive ? (
+                    <span className="text text-success">Active</span>
+                  ) : (
+                    <span className="text text-danger">Deactive</span>
+                  )}
+                </td>
+                <td className="text-right">
+                  <button type="button" className="btn btn-warning">
+                    Edit
+                  </button>
+                  <button type="button" className="btn btn-secondary ml-3">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      );
+    }
+    return (
+      <tbody>
+        <tr>
+          <td className="text-center">1</td>
+          <td>Jeremy</td>
+          <td className="text-center">
+            <span className="text text-success">Active</span>
+          </td>
+          <td className="text-right">
+            <button type="button" className="btn btn-warning">
+              Edit
+            </button>
+            <button type="button" className="btn btn-secondary ml-3">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
     );
   };
 
@@ -163,7 +208,7 @@ const TeacherManagement = (props) => {
                         <th>Update</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    {/* <tbody>
                       <tr>
                         <td>1</td>
                         <td>John</td>
@@ -182,7 +227,8 @@ const TeacherManagement = (props) => {
                           </button>
                         </td>
                       </tr>
-                    </tbody>
+                    </tbody> */}
+                    {renderTeacherList()}
                   </table>
                 </div>
               </div>
@@ -205,8 +251,8 @@ const TeacherManagement = (props) => {
   );
 };
 
-const mapStateToProps = state => ({
-
-})
+const mapStateToProps = (state) => ({
+  teacher: state.teacher.teacherList,
+});
 
 export default connect(mapStateToProps)(TeacherManagement);

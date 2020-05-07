@@ -1,7 +1,7 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 import { Modal, Button } from "react-bootstrap";
-import { fetchStudent, fetchTeacher } from "../action";
+import { fetchStudent, fetchTeacher, fetchClassroom } from "../action";
 import { connect } from "react-redux";
 
 const table = {
@@ -10,16 +10,86 @@ const table = {
 
 const ClassManage = (props) => {
   React.useEffect(() => {
-    const fetchData = () => {
+    const fetchData = async() => {
       try {
         props.dispatch(fetchStudent());
         props.dispatch(fetchTeacher());
-      } catch (e) {}
+        props.dispatch(fetchClassroom());
+      } catch (e) {
+        console.log(e);
+      }
     };
     fetchData();
   }, []);
 
-  console.log(props.student, props.teacher);
+  const renderTeacherOption = () => {
+    if (props.teacher) {
+      return (
+        <select className="form-control">
+          {props.teacher.docs.map((item, index) => {
+            return <option key={index}>{item.fullName}</option>;
+          })}
+        </select>
+      );
+    }
+    return (
+      <select className="form-control">
+        <option>John</option>
+        <option>Emily</option>
+      </select>
+    );
+  };
+
+  const renderStudentOption = () => {
+    if (props.student) {
+      return (
+        <select className="form-control">
+          {props.student.docs.map((item, index) => {
+            return <option key={index}>{item.fullName}</option>;
+          })}
+        </select>
+      );
+    }
+    return (
+      <select className="form-control">
+        <option>Jeremy</option>
+        <option>HAHA</option>
+      </select>
+    );
+  };
+
+  const renderClass = () => {
+    if (props.class) {
+      return (
+        <tbody>
+          {props.class.docs.map((item, index) => {
+            return (
+              <tr key={index}>
+                <td>{index + 1}</td>
+                <td>{item.className}</td>
+                <td className="text-center">
+                  {item.isActive ? (
+                    <span className="text text-success">Active</span>
+                  ) : (
+                    <span className="text text-danger">Deactive</span>
+                  )}
+                </td>
+                <td className="text-center">
+                  <button type="button" className="btn btn-warning">
+                    Edit
+                  </button>
+                  <button type="button" className="btn btn-secondary ml-3">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      );
+    }
+  };
+  console.log("class", props.class);
 
   let { show, onHide } = props;
 
@@ -57,17 +127,15 @@ const ClassManage = (props) => {
                     </div>
                     <div className="form-group">
                       <label>Teacher</label>
-                      <select className="form-control">
-                        <option>John</option>
-                        <option>Emily</option>
-                      </select>
+                      {renderTeacherOption()}
                     </div>
                     <div className="form-group">
                       <label>Student</label>
-                      <select className="form-control">
+                      {renderStudentOption()}
+                      {/* <select className="form-control">
                         <option>Jeremy</option>
                         <option>HAHA</option>
-                      </select>
+                      </select> */}
                     </div>
                     <div className="btn">
                       <button type="submit" className="btn btn-warning ml-4">
@@ -94,26 +162,7 @@ const ClassManage = (props) => {
                           <th>Update</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>CLass T01</td>
-                          <td className="text-center">
-                            <span>Actived</span>
-                          </td>
-                          <td className="text-center">
-                            <button type="button" className="btn btn-warning">
-                              Edit
-                            </button>
-                            <button
-                              type="button"
-                              className="btn btn-secondary ml-3"
-                            >
-                              Delete
-                            </button>
-                          </td>
-                        </tr>
-                      </tbody>
+                      {renderClass()}
                     </table>
                   </div>
                 </div>
@@ -131,9 +180,10 @@ const ClassManage = (props) => {
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   student: state.student.studentList,
   teacher: state.teacher.teacherList,
+  class: state.class.classList,
 });
 
 export default connect(mapStateToProps)(ClassManage);
