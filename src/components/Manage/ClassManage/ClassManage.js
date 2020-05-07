@@ -10,6 +10,24 @@ const table = {
 };
 
 const ClassManage = (props) => {
+  let [classroom, setClassroom] = React.useState({
+    createClass: {
+      username: "",
+      password: "",
+      fullName: "",
+      mobilePhone: "",
+      email: "",
+    },
+    errors: {
+      username: "",
+      password: "",
+      fullName: "",
+      mobilePhone: "",
+      email: "",
+    },
+    ...props,
+  });
+
   React.useEffect(() => {
     const fetchData = () => {
       try {

@@ -73,17 +73,19 @@ function fetchClassroom() {
 
 function deleteStudent(ID) {
   try {
-    userService
-      .deletedUser(ID)
-      .then((res) => {
-        dispatch({
-          type: DELETE_STUDENT,
-          payload: res.data,
+    return (dispatch) => {
+      userService
+        .deletedUser(ID)
+        .then((res) => {
+          dispatch({
+            type: DELETE_STUDENT,
+            payload: res.data,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
         });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    };
   } catch (err) {
     console.log(err);
   }
@@ -91,17 +93,19 @@ function deleteStudent(ID) {
 
 function deleteTeacher(ID) {
   try {
-    userService
-      .deletedUser(ID)
-      .then((res) => {
-        dispatch({
-          type: DELETE_TEACHER,
-          payload: res.data,
+    return (dispatch) => {
+      userService
+        .deletedUser(ID)
+        .then((res) => {
+          dispatch({
+            type: DELETE_TEACHER,
+            payload: res.data,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
         });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    };
   } catch (err) {
     console.log(err);
   }
