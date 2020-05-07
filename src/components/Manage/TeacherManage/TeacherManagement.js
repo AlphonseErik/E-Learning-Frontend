@@ -137,12 +137,12 @@ const TeacherManagement = (props) => {
                   )}
                 </td>
                 <td className="text-right">
-                  <button type="button" className="btn btn-warning">
+                  <Button variant="contained" disabled className="ml-3">
                     Edit
-                  </button>
-                  <button type="button" className="btn btn-secondary ml-3">
+                  </Button>
+                  <Button variant="contained" disabled className="ml-3">
                     Delete
-                  </button>
+                  </Button>
                 </td>
               </tr>
             );

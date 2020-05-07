@@ -1,28 +1,14 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
-import { Button, TextField, Grid } from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 import { registerStudentAction } from "../../../redux/action/userAction";
 import { connect } from "react-redux";
-import UserService from "../../../services/userService";
-import { GET_STUDENT_LIST } from "../../../redux/action/type";
-import { fetchStudent } from "../action";
-
-const userService = new UserService();
 
 const table = {
   width: "720px",
 };
 
 const StudentManage = (props) => {
-  // React.useEffect(() => {
-  //   const fetchStudentData = () => {
-  //     try {
-  //       props.dispatch(fetchStudent());
-  //     } catch (e) {}
-  //   };
-  //   fetchStudentData();
-  // }, []);
-
   let [user, setUser] = React.useState({
     userRegister: {
       username: "",
@@ -71,9 +57,7 @@ const StudentManage = (props) => {
     }
     const accesstoken = localStorage.getItem("accesstoken");
     if (valid) {
-      props.dispatch(
-        registerStudentAction(user.userRegister, accesstoken)
-      );
+      props.dispatch(registerStudentAction(user.userRegister, accesstoken));
     } else {
       alert("Please check your input");
     }
@@ -127,11 +111,7 @@ const StudentManage = (props) => {
           onChange={handleChange}
         />
         <p className="text text-danger">{user.errors.password}</p>
-        <Button
-          variant="contained"
-          color="secondary"
-          type="submit"
-        >
+        <Button variant="contained" color="secondary" type="submit">
           Save
         </Button>
       </form>
@@ -155,12 +135,12 @@ const StudentManage = (props) => {
                   )}
                 </td>
                 <td className="text-right">
-                  <button type="button" className="btn btn-warning">
+                  <Button variant="contained" disabled className="ml-3">
                     Edit
-                  </button>
-                  <button type="button" className="btn btn-secondary ml-3">
+                  </Button>
+                  <Button variant="contained" disabled className="ml-3">
                     Delete
-                  </button>
+                  </Button>
                 </td>
               </tr>
             );
@@ -235,13 +215,7 @@ const StudentManage = (props) => {
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button
-          variant="contained"
-          color="primary"
-          type="submit"
-          className="ml-3"
-          onClick={props.onHide}
-        >
+        <Button variant="contained" color="primary" onClick={props.onHide}>
           Close
         </Button>
       </Modal.Footer>

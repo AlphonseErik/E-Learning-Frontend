@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { ButtonToolbar, Button } from "react-bootstrap";
-
+import React from "react";
+import { ButtonToolbar } from "react-bootstrap";
+import { Button } from "@material-ui/core";
 import TeacherManage from "../../components/Manage/TeacherManage/TeacherManagement";
 import ClassManage from "../../components/Manage/ClassManage/ClassManage";
 import StudentManage from "../../components/Manage/StudentManage/StudentManage";
 
-const AdminDashboard = props => {
+const AdminDashboard = (props) => {
   let [modalShowClass, setModalShowClass] = React.useState(false);
   let [modalShowTeacher, setModalShowTeacher] = React.useState(false);
   let [modalShowStudent, setModalShowStudent] = React.useState(false);
@@ -30,13 +30,17 @@ const AdminDashboard = props => {
             <div className="btn-group">
               <ButtonToolbar>
                 <Button
-                  type="button"
-                  className="btn btn-sm btn-outline-danger"
+                  variant="contained"
+                  color="primary"
                   onClick={() => setModalShowClass(true)}
                 >
                   View
                 </Button>
-                <ClassManage {...props} show={modalShowClass} onHide={closeModal}/>
+                <ClassManage
+                  {...props}
+                  show={modalShowClass}
+                  onHide={closeModal}
+                />
               </ButtonToolbar>
             </div>
           </div>
@@ -59,13 +63,13 @@ const AdminDashboard = props => {
             <div className="btn-group">
               <ButtonToolbar>
                 <Button
-                  type="button"
-                  className="btn btn-sm btn-outline-danger"
+                  variant="contained"
+                  color="primary"
                   onClick={() => setModalShowStudent(true)}
                 >
                   View
                 </Button>
-                <StudentManage show={modalShowStudent} onHide={closeModal}/>
+                <StudentManage show={modalShowStudent} onHide={closeModal} />
               </ButtonToolbar>
             </div>
           </div>
@@ -88,13 +92,13 @@ const AdminDashboard = props => {
             <div className="btn-group">
               <ButtonToolbar>
                 <Button
-                  type="button"
-                  className="btn btn-sm btn-outline-danger"
+                  variant="contained"
+                  color="primary"
                   onClick={() => setModalShowTeacher(true)}
                 >
                   View
                 </Button>
-                <TeacherManage show={modalShowTeacher} onHide={closeModal}/>
+                <TeacherManage show={modalShowTeacher} onHide={closeModal} />
               </ButtonToolbar>
             </div>
           </div>

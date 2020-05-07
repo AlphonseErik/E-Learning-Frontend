@@ -1,10 +1,11 @@
 import { GET_USER_ID, GET_USER_PROFILE } from "../action/type";
+import { settings } from "../../configs/setting";
 
 
 let initialState = {
     userID: undefined,
     type: null,
-    isAdmin: undefined,
+    isSuperAdmin: undefined,
     userProfile: null,
 }
 
@@ -13,7 +14,8 @@ const UserReducer = (state = initialState, { type, payload }) => {
         case GET_USER_ID: {
             // console.log(payload)
             if (payload.isSuperAdmin) {
-                state.isAdmin = payload.isSuperAdmin;
+                state.isSuperAdmin = payload.isSuperAdmin;
+                localStorage.setItem(settings.isSuperAdmin, payload.isSuperAdmin);
             }
             state.userID = payload.userID;
             state.type = payload.type;

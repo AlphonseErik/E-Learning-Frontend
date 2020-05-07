@@ -1,6 +1,7 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
-import { Modal, Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
+import { Button } from "@material-ui/core";
 import { fetchStudent, fetchTeacher, fetchClassroom } from "../action";
 import { connect } from "react-redux";
 
@@ -10,7 +11,7 @@ const table = {
 
 const ClassManage = (props) => {
   React.useEffect(() => {
-    const fetchData = async() => {
+    const fetchData = () => {
       try {
         props.dispatch(fetchStudent());
         props.dispatch(fetchTeacher());
@@ -75,12 +76,12 @@ const ClassManage = (props) => {
                   )}
                 </td>
                 <td className="text-center">
-                  <button type="button" className="btn btn-warning">
+                  <Button variant="contained" disabled className="ml-3">
                     Edit
-                  </button>
-                  <button type="button" className="btn btn-secondary ml-3">
+                  </Button>
+                  <Button variant="contained" disabled className="ml-3">
                     Delete
-                  </button>
+                  </Button>
                 </td>
               </tr>
             );
@@ -89,7 +90,6 @@ const ClassManage = (props) => {
       );
     }
   };
-  console.log("class", props.class);
 
   let { show, onHide } = props;
 
@@ -137,13 +137,15 @@ const ClassManage = (props) => {
                         <option>HAHA</option>
                       </select> */}
                     </div>
-                    <div className="btn">
-                      <button type="submit" className="btn btn-warning ml-4">
+                    <div>
+                      <Button
+                        type="submit"
+                        color="secondary"
+                        variant="contained"
+                        disabled
+                      >
                         Save
-                      </button>
-                      <button type="button" className="btn btn-primary ml-3">
-                        Cancel
-                      </button>
+                      </Button>
                     </div>
                   </form>
                 </div>
@@ -159,7 +161,7 @@ const ClassManage = (props) => {
                           <th>No.</th>
                           <th>Class Name</th>
                           <th>Status</th>
-                          <th>Update</th>
+                          <th></th>
                         </tr>
                       </thead>
                       {renderClass()}
@@ -172,7 +174,7 @@ const ClassManage = (props) => {
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="danger" onClick={props.onHide}>
+        <Button variant="contained" color="primary" onClick={props.onHide}>
           Close
         </Button>
       </Modal.Footer>
