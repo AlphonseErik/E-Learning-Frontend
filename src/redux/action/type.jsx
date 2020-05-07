@@ -5,7 +5,9 @@ export const GET_USER_ID = "GET_USER_ID";
 export const GET_USER_PROFILE = "GET_USER_PROFILE";
 
 export const GET_STUDENT_LIST = "GET_STUDENT_LIST";
+export const DELETE_STUDENT = "DELETE_STUDENT";
 
 export const GET_TEACHER_LIST = "GET_TEACHER_LIST";
+export const DELETE_TEACHER = "DELETE_TEACHER";
 
 export const GET_CLASS_LIST = "GET_CLASS_LIST";

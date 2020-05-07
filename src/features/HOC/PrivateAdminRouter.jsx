@@ -5,8 +5,6 @@ import { routes } from "../router";
 const PrivateRouter = props => {
     const { path, Component } = props;
 
-    console.log('123', props.user)
-
     return (
         <Route path={path} render={(routeProps) => {
             const accessToken = localStorage.getItem('accesstoken');

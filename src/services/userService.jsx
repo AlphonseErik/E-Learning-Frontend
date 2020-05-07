@@ -24,6 +24,13 @@ class UserService {
             method: "GET",
         })
     }
+
+    deletedUser(ID) {
+        return restConnector({
+            url: `/api/v1/users/${ID}`,
+            method: "DELETE",
+        })
+    }
 }
 
 export default UserService;
