@@ -11,6 +11,8 @@ import {
   ListItemText,
 } from "@material-ui/core";
 import TeacherManagement from "../../components/Manage/TeacherManage/TeacherManagement";
+import SendIcon from "@material-ui/icons/Send";
+import AttachFileIcon from "@material-ui/icons/AttachFile";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
   flex: {
     display: "flex",
     alignItems: "center",
+    width: "100%",
   },
   topicWindown: {
     width: "30%",
@@ -59,25 +62,49 @@ const Dashboard = (props) => {
             </List>
           </div>
           <div className={classes.chatWindown}>
-            {[{ from: "user", msg: "hello" }].map((chat, i) => (
-              <div className={classes.flex} key={i}>
-                <Chip label={chat.from} className={classes.chip} />
-                <Typography>{chat.msg}</Typography>
-              </div>
+            {[
+              {
+                from: "Son Tung",
+                msg1: "hello",
+                to: "teacher",
+                msg2: "hi, how are you?",
+                msg3:"I need some infor about this topic. Can you help me?",
+                msg4:"Of course"
+              },
+            ].map((chat, i) => (
+              <>
+                <div className={classes.flex} key={i}>
+                  <Chip label={chat.from} className={classes.chip} />
+                  <Typography>{chat.msg1}</Typography>
+                </div>
+                <div className={classes.flex} key={i}>
+                  <Chip label={chat.to} className={classes.chip} />
+                  <Typography>{chat.msg2}</Typography>
+                </div>
+                <div className={classes.flex} key={i}>
+                  <Chip label={chat.from} className={classes.chip} />
+                  <Typography>{chat.msg3}</Typography>
+                </div>
+                <div className={classes.flex} key={i}>
+                  <Chip label={chat.to} className={classes.chip} />
+                  <Typography>{chat.msg4}</Typography>
+                </div>
+              </>
             ))}
           </div>
         </div>
         <div className={classes.flex}>
           <TextField
             className={classes.chatBox}
-            label="type here"
+            label="Text Here"
             value={textValue}
             onChange={(e) => changeTextValue(e.target.value)}
             variant="outlined"
           />
-          <Button size="large" variant="contained" color="primary">
-            SEND
+          <Button>
+            <input type="file" />
           </Button>
+          <SendIcon color="secondary" />
         </div>
       </Paper>
       <TeacherManagement />
